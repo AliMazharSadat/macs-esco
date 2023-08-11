@@ -20,26 +20,12 @@ public class Lemmatization {
         props = new Properties();
         props.put("annotators", "tokenize, ssplit, pos, lemma");
 
-         /** This is a pipeline that takes in a string and returns various analyzed linguistic forms.
-         * The String is tokenized via a tokenizer (such as PTBTokenizerAnnotator),
-         * and then other sequence model style annotation can be used to add things like lemmas,
-         * POS tags, and named entities. These are returned as a list of CoreLabels.
-         * Other analysis components build and store parse trees, dependency graphs, etc.
-         *
-         * This class is designed to apply multiple Annotators to an Annotation.
-         * The idea is that you first build up the pipeline by adding Annotators,
-         * and then you take the objects you wish to annotate and pass them in and
-         * get in return a fully annotated object.
-         *
-         *  StanfordCoreNLP loads a lot of models, so you probably
-         *  only want to do this once per execution*/
-
         this.pipeline = new StanfordCoreNLP(props);
     }
 
     public List<String> handleLemmatization(String documentText) {
 
-        List<String> lemmas = new LinkedList<String>();
+        List<String> lemmas = new LinkedList<>();
         // Create an empty Annotation just with the given text
         Annotation document = new Annotation(documentText);
         // run all Annotators on this text
@@ -57,8 +43,8 @@ public class Lemmatization {
         return lemmas;
     }
     public List<List<String>> lemmatize(List<List<String>> modules) {
-        List<List<String>> lemmatized = new ArrayList<List<String>>();
-        String res = "";
+        List<List<String>> lemmatized = new ArrayList<>();
+        String res;
         for (List<String> module : modules) {
             res = String.join(" ", module);
             lemmatized.add(handleLemmatization(res));

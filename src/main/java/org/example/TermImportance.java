@@ -77,9 +77,9 @@ public class TermImportance {
 
     public Map<String, String> getModules() {
         Map<String, String> textData = new HashMap<>();
-        for (int i = 0; i < modules.size(); i++) {
-            String key = modules.get(i).get(0) + " " + modules.get(i).get(1) + " " + modules.get(i).get(2);
-            String value =  String.join(" ", modules.get(i));
+        for (List<String> module : modules) {
+            String key = module.get(0) + " " + module.get(1) + " " + module.get(2);
+            String value = String.join(" ", module);
             textData.put(key, value);
         }
         return textData;
